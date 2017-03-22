@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>InsuranceRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/LoginForm.html</form-login-page>
+            <form-error-page>/LoginFormError.html</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application</web-resource-name>
+            <!-- TODO  remettre /* dans le pattern pour tester la sécurité qui ne fonctionne pas pour le moment -->
+            <url-pattern>/somethingToPutHere</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+            <role-name>BROKER</role-name>
+            <role-name>INSURED</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+</web-app>
