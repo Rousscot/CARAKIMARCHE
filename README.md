@@ -1,6 +1,6 @@
 # Cara
 
-Biblio = projet du cours CARA
-Cours = les pdfs du cours
-Insurance = back
-InsuranceFront = front
+Biblio = projet du cours CARA <br/>
+Cours = les pdfs du cours <br/>
+<b>Insurance</b> = back <br/>
+<b>InsuranceFront</b> = front <br/>
