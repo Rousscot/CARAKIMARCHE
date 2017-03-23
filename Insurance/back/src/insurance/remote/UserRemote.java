@@ -1,5 +1,7 @@
 package insurance.remote;
 
+import insurance.model.user.User;
+
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -7,6 +9,6 @@ import javax.ejb.Remote;
 public interface UserRemote {
 
     boolean login(String lastName, String password);
-    List<String> listUsers();
+    List<User> listUsers();
 
 }

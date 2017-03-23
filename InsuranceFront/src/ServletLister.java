@@ -1,3 +1,4 @@
+import insurance.model.user.User;
 import insurance.remote.UserRemote;
 
 import java.io.IOException;
@@ -36,25 +37,16 @@ public class ServletLister extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         PrintWriter out = response.getWriter();
-        // TODO au cas ou on arrive à choper des users List<User> users = myBean.listUsers();
-        List<String> users = myBean.listUsers();
+        List<User> users = myBean.listUsers();
         out.println("<html><body>");
         out.println("<h1>Liste des utilisateurs</h1>");
         out.println("<ul>");
-/*  TODO same pour les users
         for (User user : users) {
             out.println("<li>");
             out.println("<b>UserName</b> " + user.getUserName() + " "
                     + "<b>FirstName</b> " + user.getFirstName() + " "
                     + "<b>LastName</b> " + user.getLastName());
-            out.println("</li>");
-        }
-*/
-        for (String user : users) {
-            out.println("<li>");
-            out.println(user);
             out.println("</li>");
         }
         out.println("</ul></body></html>");

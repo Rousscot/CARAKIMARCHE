@@ -9,7 +9,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 //TODO @NamedQuery(name = "allUsers", query = "SELECT u.userName, u.pswd, u.firstName, u.lastName FROM User as u")
-@NamedQuery(name = "allUsers", query = "SELECT u.userName FROM User as u")
+@NamedQuery(name = "allUsers", query = "SELECT u FROM User u")
 public class User implements Serializable {
 
     @Id

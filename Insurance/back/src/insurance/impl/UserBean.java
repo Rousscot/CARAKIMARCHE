@@ -1,5 +1,8 @@
 package insurance.impl;
 
+import insurance.model.user.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
@@ -16,14 +19,11 @@ public class UserBean implements insurance.remote.UserRemote {
 
     //TODO le permitAll est censé laisser les roles déclarés en haut de classe utiliser cette méthode, mais c'est la théorie lol
     @PermitAll
-    public List<String> listUsers() {
-        Query q = persistance.createNamedQuery("allUsers");
-        try {
-            List<String> resultList = (List<String>) q.getResultList();
-            return resultList;
-        } catch (ClassCastException e) {
-            return null;
-        }
+    public List<User> listUsers() {
+        Query query = persistance.createNamedQuery("allUsers");
+        List<User> users = new ArrayList<User>();
+        users.addAll((List<User>) query.getResultList());
+        return users;
     }
 
     @Override
