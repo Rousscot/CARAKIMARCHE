@@ -12,7 +12,7 @@ import javax.persistence.Query;
 @Stateless
 public class UserBean implements insurance.remote.UserRemote {
     @PersistenceContext(unitName = "Insurance-ejb")
-    EntityManager persistance;
+    protected EntityManager persistance;
 
     //TODO le permitAll est censé laisser les roles déclarés en haut de classe utiliser cette méthode, mais c'est la théorie lol
     public List<User> listUsers() {
