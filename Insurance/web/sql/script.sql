@@ -3,16 +3,14 @@ DROP TABLE if exists insurance.user CASCADE;
 DROP TABLE if exists insurance.role CASCADE;
 
 CREATE TABLE insurance.user(
- id int PRIMARY KEY AUTO_INCREMENT,
- userName VARCHAR(255) UNIQUE,
+ userName VARCHAR(255) UNIQUE PRIMARY KEY,
  pswd VARCHAR(255),
  firstName VARCHAR(255),
  lastName VARCHAR(255)
 ) ENGINE=InnoDB;
 
 CREATE TABLE insurance.role(
- id int PRIMARY KEY AUTO_INCREMENT,
- roleName VARCHAR(255) UNIQUE
+ roleName VARCHAR(255) UNIQUE PRIMARY KEY
 ) ENGINE=InnoDB;
 
 CREATE TABLE insurance.roleUser(

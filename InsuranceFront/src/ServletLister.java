@@ -16,7 +16,7 @@ public class ServletLister extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @EJB
-    private UserRemote myBean;
+    private UserRemote userRemote;
 
     /**
      * Default constructor.
@@ -38,7 +38,7 @@ public class ServletLister extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        List<User> users = myBean.listUsers();
+        List<User> users = userRemote.listUsers();
         out.println("<html><body>");
         out.println("<h1>Liste des utilisateurs</h1>");
         out.println("<ul>");

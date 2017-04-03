@@ -16,7 +16,7 @@
         <web-resource-collection>
             <web-resource-name>Application</web-resource-name>
             <!-- TODO  remettre /* dans le pattern pour tester la sécurité qui ne fonctionne pas pour le moment -->
-            <url-pattern>/somethingToPutHere</url-pattern>
+            <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN</role-name>
