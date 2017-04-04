@@ -17,7 +17,7 @@ public class UserBean implements insurance.remote.UserRemote {
     //TODO le permitAll est censé laisser les roles déclarés en haut de classe utiliser cette méthode, mais c'est la théorie lol
     public List<User> listUsers() {
         Query query = persistance.createNamedQuery("allUsers");
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         users.addAll((List<User>) query.getResultList());
         return users;
     }
@@ -28,5 +28,13 @@ public class UserBean implements insurance.remote.UserRemote {
         return true;
     }
 
+    public void addUser(String userName, String pswd, String firstName, String lastName) {
+        User user = new User(userName, pswd, firstName, lastName);
+        persistance.persist(user);
+    }
+
+    public void removeUser(String userName){
+
+    }
 }
 

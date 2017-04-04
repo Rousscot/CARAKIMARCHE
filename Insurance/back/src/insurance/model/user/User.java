@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
-//TODO @NamedQuery(name = "allUsers", query = "SELECT u.userName, u.pswd, u.firstName, u.lastName FROM User as u")
 @NamedQuery(name = "allUsers", query = "SELECT u FROM User u")
 public class User implements Serializable {
 
@@ -15,6 +14,15 @@ public class User implements Serializable {
     protected String pswd;
     protected String firstName;
     protected String lastName;
+
+    public User(){}
+
+    public User(String userName, String pswd, String firstName, String lastName) {
+        this.userName = userName;
+        this.pswd = pswd;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public String getFirstName() {
         return firstName;
