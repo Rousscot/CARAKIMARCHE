@@ -2,9 +2,11 @@ package insurance.model.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import java.io.Serializable;
 
 @Entity
+@NamedQuery(name = "allRoleUsers", query = "SELECT ru FROM RoleUser ru")
 public class RoleUser implements Serializable{
     @Id
     protected String userName;

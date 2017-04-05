@@ -1,5 +1,7 @@
 package insurance.impl;
 
+import insurance.model.user.Role;
+import insurance.model.user.RoleUser;
 import insurance.model.user.User;
 
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ public class UserBean implements insurance.remote.UserRemote {
     @PersistenceContext(unitName = "Insurance-ejb")
     protected EntityManager persistance;
 
-    //TODO le permitAll est censé laisser les roles déclarés en haut de classe utiliser cette méthode, mais c'est la théorie lol
     public List<User> listUsers() {
         Query query = persistance.createNamedQuery("allUsers");
         List<User> users = new ArrayList<>();
@@ -34,7 +35,12 @@ public class UserBean implements insurance.remote.UserRemote {
     }
 
     public void removeUser(String userName){
-
+        List<User> users = listUsers();
+        for(User user : users) {
+            if(user.getUserName().equals(userName)){
+                persistance.remove(user);
+            }
+        }
     }
 }
 

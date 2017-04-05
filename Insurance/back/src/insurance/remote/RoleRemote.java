@@ -1,7 +1,7 @@
 package insurance.remote;
 
 import insurance.model.user.Role;
-import insurance.model.user.User;
+import insurance.model.user.RoleUser;
 
 import javax.ejb.Remote;
 import java.util.List;
@@ -10,4 +10,6 @@ import java.util.List;
 public interface RoleRemote {
     void addUserRole(String userName, String roleName);
     List<Role> listRoles();
+    List<RoleUser> listRoleUsers();
+    void removeUserRole(String userName);
 }

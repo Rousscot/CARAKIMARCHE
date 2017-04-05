@@ -33,25 +33,17 @@ public class ServletAddUser extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>Ajouter un utilisateur</h1>");
-        out.println("<FORM Method=\"POST\" Action=\"ajouterUtilisateur\">" +
-                "\n" +
-                "Nom : \t\t<INPUT type=text size=40 name=lastName><BR>\n" +
-                "\n" +
-                "Prénom : \t<INPUT type=text size=40 name=firstName><BR>\n" +
-                "\n" +
-                "Pseudo : \t<INPUT type=text size=40 name=userName><BR>\n" +
-                "\n" +
-                "Mot de passe : \t\t<INPUT type=password size=255 name=pswd><BR>\n" +
-                "\n" +
+        out.println("<FORM Method=\"POST\" Action=\"ajouterUtilisateur\"> \n" +
+                "Nom : \t\t<INPUT type=text size=40 name=lastName><BR>\n \n" +
+                "Prénom : \t<INPUT type=text size=40 name=firstName><BR>\n \n" +
+                "Pseudo : \t<INPUT type=text size=40 name=userName><BR>\n \n" +
+                "Mot de passe : \t\t<INPUT type=password size=255 name=pswd><BR>\n \n" +
                 "Role : \t\t<SELECT name=role><BR>\n");
         for (Role role : roleRemote.listRoles()
                 ) {
             out.println("<option value=\"" + role.getRoleName() + "\">" + role.getRoleName() + "</option>");
         }
-        out.println(
-                "\t\t<INPUT type=submit value=Créer>\n" +
-                        "\n" +
-                        "</FORM>");
+        out.println("\t\t<INPUT type=submit value=Créer>\n </FORM>");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,6 +54,7 @@ public class ServletAddUser extends HttpServlet {
         String lastName = request.getParameter("lastName");
         userRemote.addUser(userName, pswd, firstName, lastName);
         roleRemote.addUserRole(userName, request.getParameter("role"));
+        getServletContext().getRequestDispatcher("/utilisateurs");
     }
 
     public static String sha256(String base) {

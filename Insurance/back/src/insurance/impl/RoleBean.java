@@ -27,4 +27,21 @@ public class RoleBean implements RoleRemote {
         RoleUser roleUser = new RoleUser(userName, roleName);
         persistance.persist(roleUser);
     }
+
+    public void removeUserRole(String userName){
+        List<RoleUser> roleUsers = listRoleUsers();
+        for(RoleUser roleUser : roleUsers){
+            if(roleUser.getUserName().equals(userName)){
+                persistance.remove(roleUser);
+            }
+        }
+    }
+
+    public List<RoleUser> listRoleUsers(){
+        Query query = persistance.createNamedQuery("allRoleUsers");
+        List<RoleUser> roleUsers = new ArrayList<>();
+        roleUsers.addAll((List<RoleUser>) query.getResultList());
+        return roleUsers;
+    }
+
 }
