@@ -1,3 +1,5 @@
+package admin;
+
 import insurance.model.user.User;
 import insurance.remote.RoleRemote;
 import insurance.remote.UserRemote;

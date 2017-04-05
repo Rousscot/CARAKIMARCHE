@@ -1,15 +1,13 @@
 package insurance.impl;
 
-import insurance.model.user.Role;
-import insurance.model.user.RoleUser;
 import insurance.model.user.User;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class UserBean implements insurance.remote.UserRemote {
@@ -34,10 +32,10 @@ public class UserBean implements insurance.remote.UserRemote {
         persistance.persist(user);
     }
 
-    public void removeUser(String userName){
+    public void removeUser(String userName) {
         List<User> users = listUsers();
-        for(User user : users) {
-            if(user.getUserName().equals(userName)){
+        for (User user : users) {
+            if (user.getUserName().equals(userName)) {
                 persistance.remove(user);
             }
         }

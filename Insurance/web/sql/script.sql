@@ -1,6 +1,7 @@
-DROP TABLE if exists insurance.roleUser CASCADE;
-DROP TABLE if exists insurance.user CASCADE;
-DROP TABLE if exists insurance.role CASCADE;
+DROP TABLE IF EXISTS insurance.roleUser CASCADE;
+DROP TABLE IF EXISTS insurance.user CASCADE;
+DROP TABLE IF EXISTS insurance.role CASCADE;
+DROP TABLE IF EXISTS insurance.contractKind;
 
 CREATE TABLE insurance.user(
  userName VARCHAR(255) UNIQUE PRIMARY KEY,
@@ -10,17 +11,24 @@ CREATE TABLE insurance.user(
 ) ENGINE=InnoDB;
 
 CREATE TABLE insurance.role(
- roleName VARCHAR(255) UNIQUE PRIMARY KEY
+ roleName ENUM('ADMIN', 'BROKER', 'INSURED') UNIQUE PRIMARY KEY 
 ) ENGINE=InnoDB;
 
 CREATE TABLE insurance.roleUser(
 userName VARCHAR(255),
-roleName VARCHAR(255),
+roleName ENUM('ADMIN', 'BROKER', 'INSURED'),
 CONSTRAINT pk_roleUser PRIMARY KEY (userName,roleName),
 CONSTRAINT fk_userUR FOREIGN KEY (userName) REFERENCES insurance.user(userName),
 CONSTRAINT fk_roleUR FOREIGN KEY (roleName) REFERENCES insurance.role(roleName)
 ) ENGINE=InnoDB;
 
+CREATE TABLE contractKind (
+	id INTEGER PRIMARY KEY, 
+	title VARCHAR(255), 
+	description VARCHAR(255), 
+	minAmount INTEGER, 
+	category ENUM('HABITATION', 'AUTOMOBILE', 'VIE')
+) ENGINE=InnoDB;
 
 INSERT INTO insurance.user (userName, pswd, firstName, lastName) VALUES 
 ("thomas", "D38681074467C0BC147B17A9A12B9EFA8CC10BCF545F5B0BCCCCF5A93C4A2B79", "Thomas","Ostro"), 
