@@ -10,5 +10,5 @@ import java.util.List;
 public interface ContractKindRemote {
     List<ContractKind> listContractKinds();
     void removeContractKind(Integer id);
-    void addContractKind(String title, String description, Integer minAmount, ContractKindEnum category);
+    void addContractKind(String title, String description, Integer minAmount, String category);
 }

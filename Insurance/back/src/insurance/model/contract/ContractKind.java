@@ -14,12 +14,12 @@ public class ContractKind implements Serializable{
     protected String title;
     protected String description;
     protected Integer minAmount;
-    protected ContractKindEnum category;
+    protected String category;
 
     public ContractKind() {
     }
 
-    public ContractKind(String title, String description, Integer minAmount, ContractKindEnum category) {
+    public ContractKind(String title, String description, Integer minAmount, String category) {
         this.title = title;
         this.description = description;
         this.minAmount = minAmount;
@@ -58,11 +58,11 @@ public class ContractKind implements Serializable{
         this.minAmount = minAmount;
     }
 
-    public ContractKindEnum getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(ContractKindEnum category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }

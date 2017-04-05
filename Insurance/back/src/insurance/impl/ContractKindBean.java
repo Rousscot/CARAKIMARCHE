@@ -1,7 +1,6 @@
 package insurance.impl;
 
 import insurance.model.contract.ContractKind;
-import insurance.model.utils.ContractKindEnum;
 import insurance.remote.ContractKindRemote;
 
 import javax.ejb.Stateless;
@@ -32,7 +31,7 @@ public class ContractKindBean implements ContractKindRemote {
         }
     }
 
-    public void addContractKind(String title, String description, Integer minAmount, ContractKindEnum category) {
+    public void addContractKind(String title, String description, Integer minAmount, String category) {
         ContractKind contractKind = new ContractKind(title, description, minAmount, category);
         persistance.persist(contractKind);
     }

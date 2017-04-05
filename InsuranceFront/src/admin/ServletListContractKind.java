@@ -37,7 +37,7 @@ public class ServletListContractKind extends HttpServlet {
             out.println("<form method=\"POST\" action=\"types_de_contrat\"><li>");
             out.println("<b>Titre</b> " + contractKind.getTitle() + " "
                     + "<b>Description</b> " + contractKind.getDescription() + " "
-                    + "<b>Categorie</b> " + contractKind.getCategory() + " "
+                    + "<b>Catégorie</b> " + contractKind.getCategory() + " "
                     + "<b>Montant mini</b> " + contractKind.getMinAmount() + " "
                     + "<input type =\"submit\" value=\"" + contractKind.getId() + "\" name=\"idContractKind\"/> ");
             out.println("</li></form>");
