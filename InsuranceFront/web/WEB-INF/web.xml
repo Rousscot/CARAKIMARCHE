@@ -12,11 +12,20 @@
         </form-login-config>
     </login-config>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Application</web-resource-name>
             <!-- TODO  remettre /* dans le pattern pour tester la sécurité qui ne fonctionne pas pour le moment -->
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/JESUISUNECATIN</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN</role-name>
