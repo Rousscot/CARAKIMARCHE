@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-indigo.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
-    <body>
-        <FORM ACTION="j_security_check" METHOD="POST">
-            NOM <INPUT TYPE="text" NAME="j_username">
-            MOT DE PASSE <INPUT TYPE="password" NAME="j_password"><br>
-            <input TYPE="submit" VALUE="Login">
-            <input TYPE="reset" VALUE="Reset">
-        </FORM>
-    </body>
+<body style="background-color: #008080">
+<form ACTION="j_security_check" METHOD="POST"
+      style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px;">
+    <h4 style="text-align: center">Connexion</h4>
+    <h></h>
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="nom" name="j_username">
+        <label class="mdl-textfield__label" for="nom">Nom</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="password" id="pw" name="j_password">
+        <label class="mdl-textfield__label" for="pw">Mot de passe</label>
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary" type="submit" value="login">
+        Button
+    </button>
+    <button class="mdl-button mdl-js-button" type="reset" value="reset">
+        Button
+    </button>
+</form>
+</body>
 </html>
