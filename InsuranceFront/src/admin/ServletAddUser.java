@@ -1,62 +1,69 @@
 package admin;
 
+import abstraction.AbstractServlet;
 import insurance.model.user.Role;
 import insurance.remote.RoleRemote;
 import insurance.remote.UserRemote;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 @WebServlet(name = "addUser", urlPatterns = "/ajouterUtilisateur")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
-public class ServletAddUser extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class ServletAddUser extends AbstractServlet {
+
+    protected static final long serialVersionUID = 1L;
 
     @EJB
-    private RoleRemote roleRemote;
+    protected RoleRemote roleRemote;
 
     @EJB
-    private UserRemote userRemote;
+    protected UserRemote userRemote;
 
-    public ServletAddUser() {
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-
-        out.println("<html><body>");
-        out.println("<h1>Ajouter un utilisateur</h1>");
-        out.println("<FORM Method=\"POST\" Action=\"ajouterUtilisateur\"> \n" +
-                "Nom : \t\t<INPUT type=text size=40 name=lastName><BR>\n \n" +
-                "Prénom : \t<INPUT type=text size=40 name=firstName><BR>\n \n" +
-                "Pseudo : \t<INPUT type=text size=40 name=userName><BR>\n \n" +
-                "Mot de passe : \t\t<INPUT type=password size=255 name=pswd><BR>\n \n" +
-                "Role : \t\t<SELECT name=role><BR>\n");
-        for (Role role : roleRemote.listRoles()
-                ) {
-            out.println("<option value=\"" + role.getRoleName() + "\">" + role.getRoleName() + "</option>");
+    public String createOptions() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roleRemote.listRoles()) {
+            sb.append("<option value=\"");
+            sb.append(role.getRoleName());
+            sb.append("\">");
+            sb.append(role.getRoleName());
+            sb.append("</option>");
         }
-        out.println("\t\t<INPUT type=submit value=Créer>\n </FORM>");
+        return sb.toString();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String pswd = request.getParameter("pswd");
-        pswd = sha256(pswd);
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        userRemote.addUser(userName, pswd, firstName, lastName);
-        roleRemote.addUserRole(userName, request.getParameter("role"));
-        getServletContext().getRequestDispatcher("/utilisateurs");
+    @Override
+    public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
+        map.put("Add", (HttpServletRequest request, HttpServletResponse response) -> {
+            String userName = request.getParameter("userName");
+            String pswd = sha256(request.getParameter("pswd"));
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            userRemote.addUser(userName, pswd, firstName, lastName);
+            roleRemote.addUserRole(userName, request.getParameter("role"));
+            try {
+                this.getServletContext().getRequestDispatcher("/utilisateurs").forward(request, response);
+            } catch (IOException | ServletException e) {
+                e.printStackTrace(); //TODO
+            }
+        });
+    }
+
+    @Override
+    public void launchPage(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("options", this.createOptions());
+        try {
+            this.getServletContext().getRequestDispatcher("/addUser.jsp").forward(request, response);
+        } catch (IOException | ServletException e) {
+            e.printStackTrace();//TODO write in response that the request did not succeeded and why. Change the status
+        }
     }
 
     public static String sha256(String base) {

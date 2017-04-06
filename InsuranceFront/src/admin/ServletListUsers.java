@@ -4,53 +4,63 @@ import insurance.model.user.User;
 import insurance.remote.RoleRemote;
 import insurance.remote.UserRemote;
 
+import abstraction.AbstractServlet;
+
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/utilisateurs")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
-public class ServletListUsers extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class ServletListUsers extends AbstractServlet {
+
+    protected static final long serialVersionUID = 1L;
 
     @EJB
-    private UserRemote userRemote;
-    @EJB
-    private RoleRemote roleRemote;
+    protected UserRemote userRemote;
 
-    public ServletListUsers() {
+    @EJB
+    protected RoleRemote roleRemote;
+
+    @Override
+    public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
+        map.put("Delete", (HttpServletRequest request, HttpServletResponse response) -> {
+            String userName = request.getParameter("action:Delete");
+            roleRemote.removeUserRole(userName);
+            userRemote.removeUser(userName);
+            this.launchPage(request, response);
+        });
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        List<User> users = userRemote.listUsers();
-        out.println("<html><body>");
-        out.println("<h1>Liste des utilisateurs</h1>");
-        out.println("<ul>");
-        for (User user : users) {
-            out.println("<form method=\"POST\" action=\"utilisateurs\"><li>");
-            out.println("<b>UserName</b> " + user.getUserName() + " "
-                    + "<b>FirstName</b> " + user.getFirstName() + " "
-                    + "<b>LastName</b> " + user.getLastName() + " "
-                    + "<input type =\"submit\" value=\"" + user.getUserName() + "\" name=\"userName\"/> ");
-            out.println("</li></form>");
+    @Override
+    public void launchPage(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("usersTable", this.createUsersTable());
+        try {
+            this.getServletContext().getRequestDispatcher("/listUsers.jsp").forward(request, response);
+        } catch (IOException | ServletException e) {
+            e.printStackTrace();//TODO write in response that the request did not succeeded and why. Change the status
         }
-        out.println("</ul></body></html>");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        roleRemote.removeUserRole(userName);
-        userRemote.removeUser(userName);
-        doGet(request, response);
+    public String createUsersTable() {
+        StringBuilder sb = new StringBuilder();
+        for (User user : userRemote.listUsers()) {
+            sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
+            sb.append(user.getUserName());
+            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
+            sb.append(user.getFirstName());
+            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
+            sb.append(user.getLastName());
+            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\"><form method=\"POST\" action=\"utilisateurs\"><button  class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--primary\" type =\"submit\" value=\"");
+            sb.append(user.getUserName());
+            sb.append("\" name=\"action:Delete\">Supprimer</button></form></td></tr>");
+        }
+        return sb.toString();
     }
 
 }
