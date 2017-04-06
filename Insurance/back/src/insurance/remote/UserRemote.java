@@ -11,4 +11,5 @@ public interface UserRemote {
     List<User> listUsers();
     void addUser(String userName, String pswd, String firstName, String lastName);
     void removeUser(String userName);
+    User findUserByUsername(String userName);
 }

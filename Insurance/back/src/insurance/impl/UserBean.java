@@ -1,5 +1,6 @@
 package insurance.impl;
 
+import insurance.model.user.RoleUser;
 import insurance.model.user.User;
 
 import javax.ejb.Stateless;
@@ -39,6 +40,10 @@ public class UserBean implements insurance.remote.UserRemote {
                 persistance.remove(user);
             }
         }
+    }
+
+    public User findUserByUsername(String userName){
+        return persistance.find(User.class, userName);
     }
 }
 

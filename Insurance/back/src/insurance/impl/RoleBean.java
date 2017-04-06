@@ -44,4 +44,15 @@ public class RoleBean implements RoleRemote {
         return roleUsers;
     }
 
+    public List<String> listInsuredUsers(){
+        List<RoleUser> roleUsers = listRoleUsers();
+        List<String> insuredUsers = new ArrayList<>();
+        for(RoleUser roleUser: roleUsers){
+            if(roleUser.getRoleName().equals("INSURED")){
+                insuredUsers.add(roleUser.getUserName());
+            }
+        }
+        return insuredUsers;
+    }
+
 }

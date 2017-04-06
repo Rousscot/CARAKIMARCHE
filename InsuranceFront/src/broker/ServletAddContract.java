@@ -1,4 +1,4 @@
-package admin;
+package broker;
 
 import abstraction.AbstractServlet;
 import insurance.model.contract.ContractKind;
@@ -36,7 +36,7 @@ public class ServletAddContract extends AbstractServlet {
             contractRemote.addHouseContract(request.getParameter("htitle"), request.getParameter("husername"), Integer.parseInt(request.getParameter("hamount")), Integer.parseInt(request.getParameter("hkindid")),
                     "HABITATION",  Integer.parseInt(request.getParameter("maxAmount")), request.getParameter("address"));
             try {
-                this.getServletContext().getRequestDispatcher("/utilisateurs").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/contrats").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
@@ -45,7 +45,7 @@ public class ServletAddContract extends AbstractServlet {
             contractRemote.addLifeContract(request.getParameter("ltitle"), request.getParameter("lusername"), Integer.parseInt(request.getParameter("lamount")), Integer.parseInt(request.getParameter("lkindid")),
                     "VIE", Integer.parseInt(request.getParameter("capital")), Integer.parseInt(request.getParameter("minYears")));
             try {
-                this.getServletContext().getRequestDispatcher("/utilisateurs").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/contrats").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
@@ -54,7 +54,7 @@ public class ServletAddContract extends AbstractServlet {
             contractRemote.addCarContract(request.getParameter("ctitle"), request.getParameter("cusername"), Integer.parseInt(request.getParameter("camount")), Integer.parseInt(request.getParameter("ckindid")),
                     "AUTOMOBILE", request.getParameter("model"), request.getParameter("plate"));
             try {
-                this.getServletContext().getRequestDispatcher("/utilisateurs").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/contrats").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }

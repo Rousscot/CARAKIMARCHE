@@ -36,8 +36,8 @@
                 </select>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="number" id="hmaxAmount" name="hmaxAmount">
-                    <label class="mdl-textfield__label" for="hmaxAmount">Montant maximum à assurer</label>
+                    <input class="mdl-textfield__input" type="number" id="maxAmount" name="maxAmount">
+                    <label class="mdl-textfield__label" for="maxAmount">Montant maximum à assurer</label>
                 </div>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield">
