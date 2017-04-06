@@ -28,6 +28,7 @@
     <br>
     <a href="ajouterUtilisateur" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="text-align: left" >Ajouter un utilisateur (admin)</a>
     <a href="types_de_contrat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="text-align: left" >Liste des types de contrat (admin)</a>
+    <a href="ajouterContrat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="text-align: left" >Ajouter un contrat (broker)</a>
 </div>
 </body>
 </html>

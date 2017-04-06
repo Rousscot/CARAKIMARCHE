@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @WebServlet(name = "addContractKind", urlPatterns = "/ajouterTypeDeContrat")
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
+//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
 public class ServletAddContractKind extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class ServletAddContractKind extends AbstractServlet {
             try {
                 this.getServletContext().getRequestDispatcher("/types_de_contrat").forward(request, response);
             } catch (IOException | ServletException e) {
-                e.printStackTrace(); //TODO
+                e.printStackTrace();
             }
         });
     }
@@ -39,7 +39,7 @@ public class ServletAddContractKind extends AbstractServlet {
         try {
             this.getServletContext().getRequestDispatcher("/addContractKind.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
-            e.printStackTrace();//TODO write in response that the request did not succeeded and why. Change the status
+            e.printStackTrace();
         }
     }
 

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/utilisateurs")
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
+//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
 public class ServletListUsers extends AbstractServlet {
 
     protected static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class ServletListUsers extends AbstractServlet {
         try {
             this.getServletContext().getRequestDispatcher("/listUsers.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
-            e.printStackTrace();//TODO write in response that the request did not succeeded and why. Change the status
+            e.printStackTrace();
         }
     }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @WebServlet(name = "addUser", urlPatterns = "/ajouterUtilisateur")
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
+//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
 public class ServletAddUser extends AbstractServlet {
 
     protected static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class ServletAddUser extends AbstractServlet {
             try {
                 this.getServletContext().getRequestDispatcher("/utilisateurs").forward(request, response);
             } catch (IOException | ServletException e) {
-                e.printStackTrace(); //TODO
+                e.printStackTrace();
             }
         });
     }
@@ -62,7 +62,7 @@ public class ServletAddUser extends AbstractServlet {
         try {
             this.getServletContext().getRequestDispatcher("/addUser.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
-            e.printStackTrace();//TODO write in response that the request did not succeeded and why. Change the status
+            e.printStackTrace();
         }
     }
 
