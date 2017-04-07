@@ -16,8 +16,9 @@
         <thead>
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Pseudo</th>
-            <th class="mdl-data-table__cell--non-numeric">Prenom</th>
+            <th class="mdl-data-table__cell--non-numeric">Prénom</th>
             <th class="mdl-data-table__cell--non-numeric">Nom</th>
+            <th class="mdl-data-table__cell--non-numeric">Rôle</th>
             <th class="mdl-data-table__cell--non-numeric">Action</th>
         </tr>
         </thead>

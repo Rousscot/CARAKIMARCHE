@@ -56,6 +56,8 @@ public class ServletListUsers extends AbstractServlet {
             sb.append(user.getFirstName());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(user.getLastName());
+            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
+            sb.append(getRoleTranslation(roleRemote.getRoleUserFromUsername(user.getUserName()).getRoleName()));
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\"><form method=\"POST\" action=\"utilisateurs\"><button  class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--primary\" type =\"submit\" value=\"");
             sb.append(user.getUserName());
             sb.append("\" name=\"action:Delete\">Supprimer</button></form></td></tr>");
@@ -63,4 +65,14 @@ public class ServletListUsers extends AbstractServlet {
         return sb.toString();
     }
 
+    public static String getRoleTranslation(String role){
+        switch (role) {
+            case "ADMIN":
+                return "Administrateur";
+            case "BROKER":
+                return "Courtier";
+            default:
+                return "Assuré";
+        }
+    }
 }

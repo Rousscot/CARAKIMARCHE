@@ -16,7 +16,7 @@ public class RoleBean implements RoleRemote {
     @PersistenceContext(unitName = "Insurance-ejb")
     protected EntityManager persistance;
 
-    public List<Role> listRoles(){
+    public List<Role> listRoles() {
         Query query = persistance.createNamedQuery("allRoles");
         List<Role> roles = new ArrayList<>();
         roles.addAll((List<Role>) query.getResultList());
@@ -28,31 +28,40 @@ public class RoleBean implements RoleRemote {
         persistance.persist(roleUser);
     }
 
-    public void removeUserRole(String userName){
+    public void removeUserRole(String userName) {
         List<RoleUser> roleUsers = listRoleUsers();
-        for(RoleUser roleUser : roleUsers){
-            if(roleUser.getUserName().equals(userName)){
+        for (RoleUser roleUser : roleUsers) {
+            if (roleUser.getUserName().equals(userName)) {
                 persistance.remove(roleUser);
             }
         }
     }
 
-    public List<RoleUser> listRoleUsers(){
+    public List<RoleUser> listRoleUsers() {
         Query query = persistance.createNamedQuery("allRoleUsers");
         List<RoleUser> roleUsers = new ArrayList<>();
         roleUsers.addAll((List<RoleUser>) query.getResultList());
         return roleUsers;
     }
 
-    public List<String> listInsuredUsers(){
+    public List<String> listInsuredUsers() {
         List<RoleUser> roleUsers = listRoleUsers();
         List<String> insuredUsers = new ArrayList<>();
-        for(RoleUser roleUser: roleUsers){
-            if(roleUser.getRoleName().equals("INSURED")){
+        for (RoleUser roleUser : roleUsers) {
+            if (roleUser.getRoleName().equals("INSURED")) {
                 insuredUsers.add(roleUser.getUserName());
             }
         }
         return insuredUsers;
     }
 
+    public RoleUser getRoleUserFromUsername(String userName) {
+        List<RoleUser> roleUsers = listRoleUsers();
+        for (RoleUser roleUser : roleUsers) {
+            if (roleUser.getUserName().equals(userName)) {
+                return roleUser;
+            }
+        }
+        return null;
+    }
 }

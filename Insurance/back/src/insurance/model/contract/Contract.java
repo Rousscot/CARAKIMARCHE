@@ -4,8 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(name = "allContracts", query = "SELECT c FROM Contract c")
-public class Contract implements Serializable{
+@NamedQueries({
+        @NamedQuery(name = "allContracts", query = "SELECT c FROM Contract c"),
+        @NamedQuery(name = "allContractsForUser", query = "SELECT c FROM Contract c WHERE c.username = :username"),
+        @NamedQuery(name = "allContractsForUserForCategory", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.category = :category"),
+        @NamedQuery(name = "allContractsForCategory", query = "SELECT c FROM Contract c WHERE c.category = :category")})
+public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer id;
@@ -21,7 +25,8 @@ public class Contract implements Serializable{
     protected Integer capitalAmount;
     protected Integer minYears;
 
-    public Contract(){}
+    public Contract() {
+    }
 
     public Contract(String title, String username, Integer amount, Integer kindid, String category) {
         this.title = title;

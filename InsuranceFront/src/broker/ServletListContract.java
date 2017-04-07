@@ -2,7 +2,6 @@ package broker;
 
 import abstraction.AbstractServlet;
 import insurance.model.contract.Contract;
-import insurance.model.contract.ContractKind;
 import insurance.remote.ContractKindRemote;
 import insurance.remote.ContractRemote;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 @WebServlet("/contrats")
 //TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
@@ -60,7 +58,7 @@ public class ServletListContract extends AbstractServlet {
 
     public String createTableHouse() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("HABITATION")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForCategory("HABITATION")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
@@ -82,7 +80,7 @@ public class ServletListContract extends AbstractServlet {
 
     public String createTableLife() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("VIE")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForCategory("VIE")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
@@ -104,7 +102,7 @@ public class ServletListContract extends AbstractServlet {
 
     public String createTableCar() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("AUTOMOBILE")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForCategory("AUTOMOBILE")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");

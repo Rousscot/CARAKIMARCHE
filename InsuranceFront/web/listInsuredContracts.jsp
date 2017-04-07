@@ -10,10 +10,67 @@
 </head>
 <body  style="background-color: #008080">
 <div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
-    <h4>Liste des contrats de l'assuré</h4>
-    <h></h>
+    <h4>Liste des contrats de <%= request.getAttribute("insuredUserName")%></h4>
+    <hr></hr>
 
-            <%= request.getAttribute("insuredUserName")%>
+    <br>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Titre</th>
+            <th class="mdl-data-table__cell--non-numeric">Assuré</th>
+            <th class="mdl-data-table__cell--non-numeric">Adresse</th>
+            <th class="mdl-data-table__cell--non-numeric">Type de contrat</th>
+            <th>Montant</th>
+            <th>Montant max assuré</th>
+            <th class="mdl-data-table__cell--non-numeric">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= request.getAttribute("tableHouse")%>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h4>Liste des contrats d'assurance vie</h4>
+    <h></h>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Titre</th>
+            <th class="mdl-data-table__cell--non-numeric">Assuré</th>
+            <th>Capital</th>
+            <th class="mdl-data-table__cell--non-numeric">Type de contrat</th>
+            <th>Montant</th>
+            <th>Nombre minimum d'années</th>
+            <th class="mdl-data-table__cell--non-numeric">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= request.getAttribute("tableLife")%>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h4>Liste des contrats auto</h4>
+    <h></h>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Titre</th>
+            <th class="mdl-data-table__cell--non-numeric">Assuré</th>
+            <th class="mdl-data-table__cell--non-numeric">Modèle</th>
+            <th class="mdl-data-table__cell--non-numeric">Type de contrat</th>
+            <th>Montant</th>
+            <th class="mdl-data-table__cell--non-numeric">Immatriculation</th>
+            <th class="mdl-data-table__cell--non-numeric">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= request.getAttribute("tableCar")%>
+        </tbody>
+    </table>
+
 
 </div>
 </body>

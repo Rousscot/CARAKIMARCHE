@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
@@ -44,7 +45,13 @@ public class ServletListInsuredContracts extends AbstractServlet {
 
     @Override
     public void launchPage(HttpServletRequest request, HttpServletResponse response) {
-         request.setAttribute("insuredUserName", this.insuredUser.getUserName());
+
+        request.setAttribute("insuredUserName", this.insuredUser.getUserName());
+
+        request.setAttribute("tableHouse", this.createTableHouse());
+        request.setAttribute("tableLife", this.createTableLife());
+        request.setAttribute("tableCar", this.createTableCar());
+
         try {
             this.getServletContext().getRequestDispatcher("/listInsuredContracts.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
@@ -54,7 +61,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
 
     public String createTableHouse() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("HABITATION")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "HABITATION")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
@@ -76,7 +83,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
 
     public String createTableLife() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("VIE")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "VIE")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
@@ -98,7 +105,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
 
     public String createTableCar() {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContracts().stream().filter(k -> k.getCategory().equals("AUTOMOBILE")).collect(Collectors.toList())){
+        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "AUTOMOBILE")) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");

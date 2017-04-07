@@ -1,13 +1,13 @@
 package insurance.impl;
 
 import insurance.model.contract.Contract;
-import insurance.model.contract.ContractKind;
 import insurance.remote.ContractRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,18 +18,32 @@ public class ContractBean implements ContractRemote {
 
     public List<Contract> listContracts() {
         Query query = persistance.createNamedQuery("allContracts");
-        List<Contract> contractKinds = new ArrayList<>();
-        contractKinds.addAll((List<Contract>) query.getResultList());
-        return contractKinds;
+        List<Contract> contracts = new ArrayList<>();
+        contracts.addAll((List<Contract>) query.getResultList());
+        return contracts;
+    }
+
+    public List<Contract> listContractsForCategory(String category){
+        Query query = persistance.createNamedQuery("allContractsForCategory");
+        query.setParameter("category", category);
+        List<Contract> contracts = new ArrayList<>();
+        contracts.addAll((List<Contract>) query.getResultList());
+        return contracts;
+    }
+
+
+    public List<Contract> listContractsForUserForCategory(String userName, String category){
+        Query query = persistance.createNamedQuery("allContractsForUserForCategory");
+        query.setParameter("username", userName);
+        query.setParameter("category", category);
+        List<Contract> contracts = new ArrayList<>();
+        contracts.addAll((List<Contract>) query.getResultList());
+        return contracts;
     }
 
     public void removeContract(Integer id) {
-        List<Contract> contracts = listContracts();
-        for (Contract contract : contracts) {
-            if (contract.getId().equals(id)) {
-                persistance.remove(contract);
-            }
-        }
+        Contract contract = persistance.find(Contract.class, id);
+        persistance.remove(contract);
     }
 
     @Override

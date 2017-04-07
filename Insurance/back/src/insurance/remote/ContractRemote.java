@@ -9,6 +9,10 @@ import java.util.List;
 public interface ContractRemote {
     List<Contract> listContracts();
 
+    List<Contract> listContractsForCategory(String category);
+
+    List<Contract> listContractsForUserForCategory(String userName, String category);
+
     void removeContract(Integer id);
 
     void addLifeContract(String title, String username, Integer amount, Integer kindid, String category, Integer capitalAmount, Integer minYears);

@@ -30,7 +30,7 @@
     </table>
     <br>
     <br>
-    <h4>Liste des contrats dassurance vie</h4>
+    <h4>Liste des contrats d'assurance vie</h4>
     <h></h>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
