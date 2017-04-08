@@ -1,7 +1,5 @@
 package insurance.model.contract;
 
-import insurance.model.utils.ContractKindEnum;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

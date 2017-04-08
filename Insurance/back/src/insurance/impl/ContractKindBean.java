@@ -22,13 +22,13 @@ public class ContractKindBean implements ContractKindRemote {
         return contractKinds;
     }
 
+    public ContractKind getContractKindFromId(Integer id) {
+        return persistance.find(ContractKind.class, id);
+    }
+
     public void removeContractKind(Integer id) {
-        List<ContractKind> contractKinds = listContractKinds();
-        for (ContractKind contractKind : contractKinds) {
-            if (contractKind.getId().equals(id)) {
-                persistance.remove(contractKind);
-            }
-        }
+        ContractKind contractKind = persistance.find(ContractKind.class, id);
+        persistance.remove(contractKind);
     }
 
     public void addContractKind(String title, String description, Integer minAmount, String category) {

@@ -59,6 +59,8 @@ public class ServletListInsuredContracts extends AbstractServlet {
         }
     }
 
+    //TODO Gérer les suppressions
+
     public String createTableHouse() {
         StringBuilder sb = new StringBuilder();
         for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "HABITATION")) {
@@ -69,7 +71,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getAddress());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
@@ -91,7 +93,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
             sb.append("</td>\n<td>");
             sb.append(contract.getCapitalAmount());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
@@ -113,7 +115,7 @@ public class ServletListInsuredContracts extends AbstractServlet {
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getModel());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");

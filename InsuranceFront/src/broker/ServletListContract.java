@@ -66,7 +66,7 @@ public class ServletListContract extends AbstractServlet {
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getAddress());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
@@ -88,7 +88,7 @@ public class ServletListContract extends AbstractServlet {
             sb.append("</td>\n<td>");
             sb.append(contract.getCapitalAmount());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
@@ -110,7 +110,7 @@ public class ServletListContract extends AbstractServlet {
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getModel());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getKindId());
+            sb.append(contractKindRemote.getContractKindFromId(contract.getKindId()).getTitle());
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");

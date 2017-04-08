@@ -33,12 +33,8 @@ public class UserBean implements insurance.remote.UserRemote {
     }
 
     public void removeUser(String userName) {
-        List<User> users = listUsers();
-        for (User user : users) {
-            if (user.getUserName().equals(userName)) {
-                persistance.remove(user);
-            }
-        }
+        User user = persistance.find(User.class, userName);
+        persistance.remove(user);
     }
 
     public User findUserByUsername(String userName) {
