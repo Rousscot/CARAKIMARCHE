@@ -2,9 +2,11 @@ package broker;
 
 import abstraction.AbstractServlet;
 import insurance.model.contract.ContractKind;
+import insurance.model.user.RoleUser;
 import insurance.model.user.User;
 import insurance.remote.ContractKindRemote;
 import insurance.remote.ContractRemote;
+import insurance.remote.RoleRemote;
 import insurance.remote.UserRemote;
 
 import javax.ejb.EJB;
@@ -28,6 +30,8 @@ public class ServletAddContract extends AbstractServlet {
     protected ContractRemote contractRemote;
     @EJB
     protected UserRemote userRemote;
+    @EJB
+    protected RoleRemote roleRemote;
 
     //TODO changer la redirection
     @Override
@@ -76,13 +80,15 @@ public class ServletAddContract extends AbstractServlet {
 
     public String createOptionsUser() {
         StringBuilder sb = new StringBuilder();
-        for (User user : userRemote.listUsers()) {
+
+        for(String userName : roleRemote.listUsersForRole("INSURED")){
             sb.append("<option value=\"");
-            sb.append(user.getUserName());
+            sb.append(userName);
             sb.append("\">");
-            sb.append(user.getUserName());
+            sb.append(userName);
             sb.append("</option>");
         }
+
         return sb.toString();
     }
 

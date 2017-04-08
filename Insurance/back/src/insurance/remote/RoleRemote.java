@@ -11,7 +11,8 @@ public interface RoleRemote {
     void addUserRole(String userName, String roleName);
     List<Role> listRoles();
     List<RoleUser> listRoleUsers();
-    List<String> listInsuredUsers();
+    List<RoleUser> listRoleUsersForRole(String roleName);
+    List<String> listUsersForRole(String role);
     void removeUserRole(String userName);
     RoleUser getRoleUserFromUsername(String userName);
 }

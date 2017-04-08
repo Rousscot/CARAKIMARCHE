@@ -13,13 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 @WebServlet("/contrats_assure")
-//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
+//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN", "INSURED"}))
 public class ServletListInsuredContracts extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 
@@ -45,7 +43,6 @@ public class ServletListInsuredContracts extends AbstractServlet {
 
     @Override
     public void launchPage(HttpServletRequest request, HttpServletResponse response) {
-
         request.setAttribute("insuredUserName", this.insuredUser.getUserName());
 
         request.setAttribute("tableHouse", this.createTableHouse());

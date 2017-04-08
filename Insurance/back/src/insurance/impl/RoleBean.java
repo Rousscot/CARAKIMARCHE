@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class RoleBean implements RoleRemote {
@@ -18,9 +19,14 @@ public class RoleBean implements RoleRemote {
 
     public List<Role> listRoles() {
         Query query = persistance.createNamedQuery("allRoles");
-        List<Role> roles = new ArrayList<>();
-        roles.addAll((List<Role>) query.getResultList());
-        return roles;
+        return(List<Role>) query.getResultList();
+
+    }
+
+    public List<RoleUser> listRoleUsersForRole(String roleName){
+        Query query = persistance.createNamedQuery("allRoleUsersForRole");
+        query.setParameter("roleName", roleName);
+        return (List<RoleUser>) query.getResultList();
     }
 
     public void addUserRole(String userName, String roleName) {
@@ -29,12 +35,9 @@ public class RoleBean implements RoleRemote {
     }
 
     public void removeUserRole(String userName) {
-        List<RoleUser> roleUsers = listRoleUsers();
-        for (RoleUser roleUser : roleUsers) {
-            if (roleUser.getUserName().equals(userName)) {
-                persistance.remove(roleUser);
-            }
-        }
+        Query query = persistance.createNamedQuery("removeRoleUsersForUser");
+        query.setParameter("userName", userName);
+        query.executeUpdate();
     }
 
     public List<RoleUser> listRoleUsers() {
@@ -44,14 +47,9 @@ public class RoleBean implements RoleRemote {
         return roleUsers;
     }
 
-    public List<String> listInsuredUsers() {
-        List<RoleUser> roleUsers = listRoleUsers();
-        List<String> insuredUsers = new ArrayList<>();
-        for (RoleUser roleUser : roleUsers) {
-            if (roleUser.getRoleName().equals("INSURED")) {
-                insuredUsers.add(roleUser.getUserName());
-            }
-        }
+    public List<String> listUsersForRole(String role) {
+        List<RoleUser> roleUsers = listRoleUsersForRole(role);
+        List<String> insuredUsers = roleUsers.stream().map(RoleUser::getUserName).collect(Collectors.toList());
         return insuredUsers;
     }
 

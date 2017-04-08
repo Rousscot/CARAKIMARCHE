@@ -10,9 +10,11 @@
 </head>
 <body  style="background-color: #008080">
 <div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
-    <h4>Liste des contrats de <%= request.getAttribute("insuredUserName")%></h4>
-    <hr></hr>
+    <h2>Liste des contrats de <%= request.getAttribute("insuredUserName")%></h2>
+    </br>
 
+    <h4>Liste des contrats d'assurance habitation</h4>
+    <hr></hr>
     <br>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
@@ -33,7 +35,7 @@
     <br>
     <br>
     <h4>Liste des contrats d'assurance vie</h4>
-    <h></h>
+    <hr></hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
         <tr>
@@ -53,7 +55,7 @@
     <br>
     <br>
     <h4>Liste des contrats auto</h4>
-    <h></h>
+    <hr></hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
         <tr>
