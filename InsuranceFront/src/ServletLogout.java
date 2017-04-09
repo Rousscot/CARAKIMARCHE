@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletLogout extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    //TODO LOGOUT FONCTIONNE PAS DU TOUT
     @EJB
     private UserRemote myBean ;
 

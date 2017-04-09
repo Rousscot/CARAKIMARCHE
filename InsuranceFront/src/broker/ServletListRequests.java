@@ -37,7 +37,18 @@ public class ServletListRequests extends AbstractServlet {
 
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
-        //TODO ?
+        map.put("CancelRequestedContract", (HttpServletRequest request, HttpServletResponse response) -> {
+            Integer contractId = Integer.parseInt(request.getParameter("action:CancelRequestedContract"));
+            requestRemote.cancelRequestedContract(contractId);
+            contractRemote.desactiveContract(contractId);
+            this.launchPage(request, response);
+        });
+        map.put("ValidRequestedContract", (HttpServletRequest request, HttpServletResponse response) -> {
+            Integer contractId = Integer.parseInt(request.getParameter("action:ValidRequestedContract"));
+            requestRemote.validRequestedContract(contractId);
+            contractRemote.activeContract(contractId);
+            this.launchPage(request, response);
+        });
     }
 
     @Override
@@ -143,7 +154,17 @@ public class ServletListRequests extends AbstractServlet {
 
             sb.append("<td class=\"mdl-data-table__cell--non-numeric\"><button ").append(button2Style).append(" class=\"mdl-button mdl-js-button mdl-button--raised \" value=\"");
             sb.append(contractId);
-            sb.append("\" >").append(button2Name).append("</button></td></tr>");
+            sb.append("\" >").append(button2Name).append("</button></td>");
+
+            if(request.getBrokerAcceptance() == null) {
+                sb.append("<td class=\"mdl-data-table__cell--non-numeric\"><form method=\"POST\" action=\"demandes\"><button class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--primary\" type =\"submit\" value=\"");
+                sb.append(contractId);
+                sb.append("\" name=\"action:ValidRequestedContract\">Valider</button></form></td>");
+
+                sb.append("<td class=\"mdl-data-table__cell--non-numeric\"><form method=\"POST\" action=\"demandes\"><button class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--primary\" type =\"submit\" value=\"");
+                sb.append(contractId);
+                sb.append("\" name=\"action:CancelRequestedContract\">Supprimer</button></form></td></tr>");
+            }
         }
         return sb.toString();
     }

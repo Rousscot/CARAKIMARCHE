@@ -14,4 +14,8 @@ public interface RequestRemote {
     void addRequest(Integer contractId, String requestType, Boolean insuredValidation);
 
     Request getRequestFromContractId(Integer contractId);
+
+    void cancelRequestedContract(Integer contractId);
+
+    void validRequestedContract(Integer contractId);
 }

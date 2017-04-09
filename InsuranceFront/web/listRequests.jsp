@@ -27,6 +27,8 @@
             <th>Montant max assuré</th>
             <th class="mdl-data-table__cell--non-numeric">Type de requête</th>
             <th class="mdl-data-table__cell--non-numeric">Statut</th>
+            <th class="mdl-data-table__cell--non-numeric">Valider</th>
+            <th class="mdl-data-table__cell--non-numeric">Annuler</th>
         </tr>
         </thead>
         <tbody>
@@ -45,9 +47,11 @@
             <th>Capital</th>
             <th class="mdl-data-table__cell--non-numeric">Type de contrat</th>
             <th>Montant</th>
-            <th>Nombre minimum d'années</th>
+            <th>Nombre mini d'années</th>
             <th class="mdl-data-table__cell--non-numeric">Type de requête</th>
             <th class="mdl-data-table__cell--non-numeric">Statut</th>
+            <th class="mdl-data-table__cell--non-numeric">Valider</th>
+            <th class="mdl-data-table__cell--non-numeric">Annuler</th>
         </tr>
         </thead>
         <tbody>
@@ -68,7 +72,10 @@
             <th>Montant</th>
             <th class="mdl-data-table__cell--non-numeric">Immatriculation</th>
             <th class="mdl-data-table__cell--non-numeric">Type de requête</th>
-            <th class="mdl-data-table__cell--non-numeric">Statut</th>        </tr>
+            <th class="mdl-data-table__cell--non-numeric">Statut</th>
+            <th class="mdl-data-table__cell--non-numeric">Valider</th>
+            <th class="mdl-data-table__cell--non-numeric">Annuler</th>
+        </tr>
         </thead>
         <tbody>
         <%= request.getAttribute("tableCar")%>

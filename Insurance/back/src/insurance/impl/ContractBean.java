@@ -104,4 +104,16 @@ public class ContractBean implements ContractRemote {
         return contract.getId();
     }
 
+    public void activeContract(Integer contractId){
+        Query query = persistance.createNamedQuery("activeContract");
+        query.setParameter("contractId", contractId);
+        query.executeUpdate();
+    }
+
+    public void desactiveContract(Integer contractId){
+        Query query = persistance.createNamedQuery("desactiveContract");
+        query.setParameter("contractId", contractId);
+        query.executeUpdate();
+    }
+
 }

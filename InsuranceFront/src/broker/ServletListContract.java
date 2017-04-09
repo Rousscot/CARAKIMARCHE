@@ -2,8 +2,10 @@ package broker;
 
 import abstraction.AbstractServlet;
 import insurance.model.contract.Contract;
+import insurance.model.contract.Request;
 import insurance.remote.ContractKindRemote;
 import insurance.remote.ContractRemote;
+import insurance.remote.RequestRemote;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -25,11 +27,14 @@ public class ServletListContract extends AbstractServlet {
     @EJB
     protected ContractRemote contractRemote;
 
+    //TODO ajouter la remote request pour supprimer la requete si elle existe pour le contrat à supprimer)
+
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
         map.put("DeleteHouse", (HttpServletRequest request, HttpServletResponse response) -> {
             Integer id = Integer.parseInt(request.getParameter("action:DeleteHouse"));
             contractRemote.removeContract(id);
+
             this.launchPage(request, response);
         });
         map.put("DeleteLife", (HttpServletRequest request, HttpServletResponse response) -> {

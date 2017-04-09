@@ -30,4 +30,9 @@ public interface ContractRemote {
     Integer addSubscriptionHouseContract(String title, String username, Integer amount, Integer kindid, String category, Integer maxAmount, String address);
 
     Integer addSubscriptionCarContract(String title, String username, Integer amount, Integer kindid, String category, String model, String plate);
+
+    void activeContract(Integer contractId);
+
+    void desactiveContract(Integer contractId);
+
 }
