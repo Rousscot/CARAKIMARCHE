@@ -23,7 +23,6 @@ public class UserBean implements insurance.remote.UserRemote {
 
     @Override
     public boolean login(String lastName, String password) {
-        //TODO
         return true;
     }
 

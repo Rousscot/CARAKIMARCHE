@@ -3,8 +3,6 @@ package insurance.model.contract;
 import javax.persistence.*;
 import java.io.Serializable;
 
-//TODO foreign key sur le contractID
-
 @Entity
 @NamedQueries({@NamedQuery(name = "allRemoveRequestsForType", query = "SELECT r FROM Request r WHERE r.contractId IN ( :contractIds) AND r.requestType = :requestType"),
         @NamedQuery(name = "removalRequestForContractId", query = "UPDATE Request r SET r.requestType = \"removal\" WHERE r.contractId = :contractId"),

@@ -39,7 +39,6 @@ public class ServletMyRequests extends AbstractServlet {
 
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
-        //TODO ?
     }
 
     @Override

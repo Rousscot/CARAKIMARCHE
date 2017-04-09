@@ -35,7 +35,6 @@ public class ServletAddContract extends AbstractServlet {
     @EJB
     protected RoleRemote roleRemote;
 
-    //TODO changer la redirection
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
         map.put("AddHouseContract", (HttpServletRequest request, HttpServletResponse response) -> {

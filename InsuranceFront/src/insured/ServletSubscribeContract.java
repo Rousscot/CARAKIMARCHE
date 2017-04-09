@@ -32,7 +32,6 @@ public class ServletSubscribeContract extends AbstractServlet {
     @EJB
     protected RequestRemote requestRemote;
 
-    //TODO changer la redirection
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
         map.put("SubscribeHouseContract", (HttpServletRequest request, HttpServletResponse response) -> {
@@ -40,7 +39,7 @@ public class ServletSubscribeContract extends AbstractServlet {
                     "HABITATION",  Integer.parseInt(request.getParameter("maxAmount")), request.getParameter("address"));
             requestRemote.addRequest(contractId, "subscription", true);
             try {
-                this.getServletContext().getRequestDispatcher("/mes_contrats").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/mes_demandes").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
@@ -50,7 +49,7 @@ public class ServletSubscribeContract extends AbstractServlet {
                     "VIE", Integer.parseInt(request.getParameter("capital")), Integer.parseInt(request.getParameter("minYears")));
             requestRemote.addRequest(contractId, "subscription", true);
             try {
-                this.getServletContext().getRequestDispatcher("/mes_contrats").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/mes_demandes").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
@@ -60,7 +59,7 @@ public class ServletSubscribeContract extends AbstractServlet {
                     "AUTOMOBILE", request.getParameter("model"), request.getParameter("plate"));
             requestRemote.addRequest(contractId, "subscription", true);
             try {
-                this.getServletContext().getRequestDispatcher("/mes_contrats").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/mes_demandes").forward(request, response);
             } catch (IOException | ServletException e) {
                 e.printStackTrace();
             }
