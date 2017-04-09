@@ -27,8 +27,6 @@ public class ServletListContract extends AbstractServlet {
     @EJB
     protected ContractRemote contractRemote;
 
-    //TODO ajouter la remote request pour supprimer la requete si elle existe pour le contrat à supprimer)
-
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
         map.put("DeleteHouse", (HttpServletRequest request, HttpServletResponse response) -> {
