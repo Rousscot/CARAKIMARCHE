@@ -28,13 +28,13 @@ This application uses EJBs, JPA for the persistance, JAAS for the security and S
 
 ## Missing features
 
-*We had a lot of time issues because of PEPIT* . Due to the problems we were facing with our group, we had a lot of works to do to validate the module.
+**We had a lot of time issues because of PEPIT** . Due to the problems we were facing with our group, we had a lot of works to do to validate the module.
 
 Also we got a lot of problem with JAAS with our main machines! As soon as we added an url pattern matching our application we got 403 errors everywhere even when the user got the right role. Checking the log the user was right, the role was right, the access was granted but we ended up on a 403 error all the time. The logs did'nt gave any clue of what happened...
 
 During our check we found that this error might come from the name of our computer because even if we wrote "localhost:8080" in the url, JNDI used the name of our computer in order to do his lookup. 
 
-In the end we could get it work only by *changing of computer* with a name without secial characters as `-` or `.`. This problem made us lose a lot of time, thus these are the functionality we did not implemented:
+In the end we could get it work only by **changing of computer** with a name without secial characters as `-` or `.`. This problem made us lose a lot of time, thus these are the functionality we did not implemented:
 
 - The broker doesn't have a list of insured, but the list of insured of the agency.
 - There is no notification system used.
