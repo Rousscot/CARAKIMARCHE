@@ -13,7 +13,7 @@
     <div style=" display: flex; justify-content: space-between;">
         <div style="width: 30%; border-right: solid 1px grey;">
             <h4>Ajouter un contrat d'habitation</h4>
-            <h></h>
+            <hr>
             <form Method="POST" Action="ajouterContrat">
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="htitle" size="40" name="htitle">
@@ -53,7 +53,7 @@
         </div>
         <div style="width: 30%; border-right: solid 1px grey;">
             <h4>Ajouter un contrat d'assurance vie</h4>
-            <h></h>
+            <hr>
             <form Method="POST" Action="ajouterContrat">
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="ltitle" size="40" name="ltitle">
@@ -93,7 +93,7 @@
         </div>
         <div style="width: 30%;">
             <h4>Ajouter un contrat voiture</h4>
-            <h></h>
+            <hr>
             <form Method="POST" Action="ajouterContrat">
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="ctitle" size="40" name="ctitle">

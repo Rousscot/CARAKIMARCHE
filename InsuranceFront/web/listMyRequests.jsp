@@ -14,7 +14,7 @@
     </br>
 
     <h4>Liste des contrats d'assurance habitation</h4>
-    <hr></hr>
+    <hr>
     <br>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
@@ -36,7 +36,7 @@
     <br>
     <br>
     <h4>Liste des contrats d'assurance vie</h4>
-    <hr></hr>
+    <hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
         <tr>
@@ -57,7 +57,7 @@
     <br>
     <br>
     <h4>Liste des contrats auto</h4>
-    <hr></hr>
+    <hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
         <tr>
