@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ContractBean implements ContractRemote {
         return contracts;
     }
 
-    public List<Contract> listContractsForCategory(String category){
+    public List<Contract> listContractsForCategory(String category) {
         Query query = persistance.createNamedQuery("allContractsForCategory");
         query.setParameter("category", category);
         List<Contract> contracts = new ArrayList<>();
@@ -31,8 +30,15 @@ public class ContractBean implements ContractRemote {
         return contracts;
     }
 
+    public List<Contract> listContractsRequestedForCategory(String category) {
+        Query query = persistance.createNamedQuery("allContractsRequestedForCategory");
+        query.setParameter("category", category);
+        List<Contract> contracts = new ArrayList<>();
+        contracts.addAll((List<Contract>) query.getResultList());
+        return contracts;
+    }
 
-    public List<Contract> listContractsForUserForCategory(String userName, String category){
+    public List<Contract> listContractsForUserForCategory(String userName, String category) {
         Query query = persistance.createNamedQuery("allContractsForUserForCategory");
         query.setParameter("username", userName);
         query.setParameter("category", category);
@@ -41,7 +47,7 @@ public class ContractBean implements ContractRemote {
         return contracts;
     }
 
-    public List<Contract> listContractsRequestedForUserForCategory(String userName, String category){
+    public List<Contract> listContractsRequestedForUserForCategory(String userName, String category) {
         Query query = persistance.createNamedQuery("allContractsRequestedForUserAndCategory");
         query.setParameter("userName", userName);
         query.setParameter("category", category);

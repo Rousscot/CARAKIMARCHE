@@ -9,7 +9,8 @@ import java.io.Serializable;
         @NamedQuery(name = "allContractsForUser", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.isActive = true"),
         @NamedQuery(name = "allContractsForUserForCategory", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.category = :category AND c.isActive = true"),
         @NamedQuery(name = "allContractsForCategory", query = "SELECT c FROM Contract c WHERE c.category = :category AND c.isActive = true"),
-        @NamedQuery(name="allContractsRequestedForUserAndCategory", query = "SELECT c FROM Contract c JOIN Request r ON r.contractId = c.id WHERE c.username = :userName AND c.category = :category")})
+        @NamedQuery(name="allContractsRequestedForUserAndCategory", query = "SELECT c FROM Contract c JOIN Request r ON r.contractId = c.id WHERE c.username = :userName AND c.category = :category"),
+        @NamedQuery(name="allContractsRequestedForCategory", query = "SELECT c FROM Contract c JOIN Request r ON r.contractId = c.id WHERE c.category = :category")})
 public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

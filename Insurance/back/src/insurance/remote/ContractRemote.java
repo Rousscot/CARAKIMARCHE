@@ -13,6 +13,8 @@ public interface ContractRemote {
 
     List<Contract> listContractsForUserForCategory(String userName, String category);
 
+    List<Contract> listContractsRequestedForCategory(String category);
+
     List<Contract> listContractsRequestedForUserForCategory(String userName, String category);
 
     void removeContract(Integer id);

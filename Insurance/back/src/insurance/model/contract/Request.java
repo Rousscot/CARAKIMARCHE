@@ -6,10 +6,10 @@ import java.io.Serializable;
 //TODO foreign key sur le contractID
 
 @Entity
-@NamedQueries({@NamedQuery(name="allRemoveRequestsForType", query = "SELECT r FROM Request r WHERE r.contractId IN ( :contractIds) AND r.requestType = :requestType"),
-        @NamedQuery(name="removalRequestForContractId", query = "UPDATE Request r SET r.requestType = \"removal\" WHERE r.contractId = :contractId"),
+@NamedQueries({@NamedQuery(name = "allRemoveRequestsForType", query = "SELECT r FROM Request r WHERE r.contractId IN ( :contractIds) AND r.requestType = :requestType"),
+        @NamedQuery(name = "removalRequestForContractId", query = "UPDATE Request r SET r.requestType = \"removal\" WHERE r.contractId = :contractId"),
         @NamedQuery(name = "getRequestForContractId", query = "SELECT r FROM Request r WHERE r.contractId = :contractId")})
-public class Request implements Serializable{
+public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer id;
