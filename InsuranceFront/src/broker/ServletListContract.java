@@ -9,6 +9,8 @@ import insurance.remote.RequestRemote;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +19,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @WebServlet("/contrats")
-//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"BROKER"}))
 public class ServletListContract extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 
@@ -27,22 +29,27 @@ public class ServletListContract extends AbstractServlet {
     @EJB
     protected ContractRemote contractRemote;
 
+    @EJB
+    protected RequestRemote requestRemote;
+
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
         map.put("DeleteHouse", (HttpServletRequest request, HttpServletResponse response) -> {
             Integer id = Integer.parseInt(request.getParameter("action:DeleteHouse"));
             contractRemote.removeContract(id);
-
+            requestRemote.deleteRequestForContracts(id);
             this.launchPage(request, response);
         });
         map.put("DeleteLife", (HttpServletRequest request, HttpServletResponse response) -> {
             Integer id = Integer.parseInt(request.getParameter("action:DeleteLife"));
             contractRemote.removeContract(id);
+            requestRemote.deleteRequestForContracts(id);
             this.launchPage(request, response);
         });
         map.put("DeleteCar", (HttpServletRequest request, HttpServletResponse response) -> {
             Integer id = Integer.parseInt(request.getParameter("action:DeleteCar"));
             contractRemote.removeContract(id);
+            requestRemote.deleteRequestForContracts(id);
             this.launchPage(request, response);
         });
     }

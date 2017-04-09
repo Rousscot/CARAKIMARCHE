@@ -9,7 +9,7 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body  style="background-color: #008080">
-<div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
+<div style="background-color: #FFF; width: 75%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
     <h4>Liste des types de contrats</h4>
     <hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
@@ -27,7 +27,7 @@
         </tbody>
     </table>
     <br>
-    <a href="ajouterTypeDeContrat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Ajouter un type de contrat (admin)</a>
+    <a href="ajouterTypeDeContrat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Ajouter un type de contrat</a>
     <a href="index.html" class="mdl-button mdl-js-button mdl-button--accent">Retour</a>
 </div>
 </body>

@@ -56,4 +56,11 @@ public class RequestBean implements RequestRemote {
         query.setParameter("contractId", contractId);
         query.executeUpdate();
     }
+
+    @Override
+    public void deleteRequestForContracts(Integer contractId) {
+        Query query = persistance.createNamedQuery("deleteRequestForContracts");
+        query.setParameter("contractId", contractId);
+        query.executeUpdate();
+    }
 }

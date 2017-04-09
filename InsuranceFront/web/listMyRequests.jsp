@@ -9,7 +9,7 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body  style="background-color: #008080">
-<div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
+<div style="background-color: #FFF; width: 75%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
     <h2>Liste des demandes de <%= request.getAttribute("insuredUserName")%></h2>
     </br>
 
@@ -74,8 +74,9 @@
         <%= request.getAttribute("tableCar")%>
         </tbody>
     </table>
-
-
+    <br>
+    <br>
+    <a href="index.html" class="mdl-button mdl-js-button mdl-button--accent">Retour</a>
 </div>
 </body>
 </html>

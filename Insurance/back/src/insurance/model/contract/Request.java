@@ -10,7 +10,8 @@ import java.io.Serializable;
         @NamedQuery(name = "removalRequestForContractId", query = "UPDATE Request r SET r.requestType = \"removal\" WHERE r.contractId = :contractId"),
         @NamedQuery(name = "validRequestForContractId", query = "UPDATE Request r SET r.brokerAcceptance = true WHERE r.contractId = :contractId"),
         @NamedQuery(name = "cancelRequestForContractId", query = "UPDATE Request r SET r.brokerAcceptance = false WHERE r.contractId = :contractId"),
-        @NamedQuery(name = "getRequestForContractId", query = "SELECT r FROM Request r WHERE r.contractId = :contractId")})
+        @NamedQuery(name = "getRequestForContractId", query = "SELECT r FROM Request r WHERE r.contractId = :contractId"),
+        @NamedQuery(name = "deleteRequestForContracts", query = "DELETE FROM Request r WHERE r.contractId = :contractId")})
 public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

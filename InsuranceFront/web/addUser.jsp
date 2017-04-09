@@ -9,7 +9,7 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body  style="background-color: #008080">
-<div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
+<div style="background-color: #FFF; width: 75%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
     <h4>Ajouter un utilisateur</h4>
     <hr>
     <form Method="POST" Action="ajouterUtilisateur">
@@ -43,7 +43,7 @@
         </button>
     </form>
     <br>
-    <a href="utilisateurs" style="text-align: left;" class="mdl-button mdl-js-button mdl-button--primary" >Retour</a>
+    <a href="utilisateurs" class="mdl-button mdl-js-button mdl-button--primary">Retour</a>
 </div>
 </body>
 </html>

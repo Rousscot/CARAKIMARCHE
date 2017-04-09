@@ -9,6 +9,8 @@ import insurance.remote.UserRemote;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +19,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @WebServlet("/contrats_assure")
-//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMIN", "INSURED"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"BROKER"}))
 public class ServletListInsuredContracts extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 

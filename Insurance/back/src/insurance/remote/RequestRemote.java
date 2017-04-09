@@ -18,4 +18,6 @@ public interface RequestRemote {
     void cancelRequestedContract(Integer contractId);
 
     void validRequestedContract(Integer contractId);
+
+    void deleteRequestForContracts(Integer contractId);
 }

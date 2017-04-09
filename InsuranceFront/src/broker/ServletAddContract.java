@@ -11,6 +11,8 @@ import insurance.remote.UserRemote;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "addContract", urlPatterns = "/ajouterContrat")
-//TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"BROKER"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"BROKER"}))
 public class ServletAddContract extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 
