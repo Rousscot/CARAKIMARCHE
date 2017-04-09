@@ -27,7 +27,7 @@ cp -R Insurance/{back,lib} $BFOLDER
 
 mkdir $FFOLDER
 
-cp -R InsuranceFront/{lib,src,web}
+cp -R InsuranceFront/{lib,src,web} $FFOLDER
 
 # Init archives
 
