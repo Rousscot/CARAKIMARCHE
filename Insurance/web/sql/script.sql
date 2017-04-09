@@ -22,7 +22,7 @@ CONSTRAINT fk_userUR FOREIGN KEY (userName) REFERENCES insurance.user(userName),
 CONSTRAINT fk_roleUR FOREIGN KEY (roleName) REFERENCES insurance.role(roleName)
 ) ENGINE=InnoDB;
 
-CREATE TABLE contractKind (
+CREATE TABLE insurance.contractKind (
 	id INTEGER PRIMARY KEY, 
 	title VARCHAR(255), 
 	description VARCHAR(255), 

@@ -1,11 +1,7 @@
 package broker;
 
 import abstraction.AbstractServlet;
-import insurance.model.contract.Contract;
-import insurance.model.user.RoleUser;
 import insurance.model.user.User;
-import insurance.remote.ContractKindRemote;
-import insurance.remote.ContractRemote;
 import insurance.remote.RoleRemote;
 import insurance.remote.UserRemote;
 
@@ -15,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -49,13 +44,10 @@ public class ServletListInsured extends AbstractServlet {
 
     public String createTableInsured() {
 
-        List<User> insuredUsers = new ArrayList<>();
-        for(String userName : roleRemote.listInsuredUsers()){
-            insuredUsers.add(userRemote.findUserByUsername(userName));
-        }
+        List<User> insuredUsers = roleRemote.listUsersForRole("INSURED").stream().map(userName -> userRemote.findUserByUsername(userName)).collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder();
-        for (User user : insuredUsers){
+        for (User user : insuredUsers) {
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(user.getUserName());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
