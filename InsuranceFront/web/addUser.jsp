@@ -11,7 +11,7 @@
 <body  style="background-color: #008080">
 <div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
     <h4>Ajouter un utilisateur</h4>
-    <h></h>
+    <hr>
     <form Method="POST" Action="ajouterUtilisateur">
         <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="nom" size="40" name="lastName">

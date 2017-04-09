@@ -11,7 +11,7 @@
 <body  style="background-color: #008080">
 <div style="background-color: #FFF; width: 50%; margin: auto; margin-top: 100px; border-radius: 5px; padding: 20px; text-align: center;">
     <h4>Liste des assurés</h4>
-    <hr></hr>
+    <hr>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
         <thead>
         <tr>
