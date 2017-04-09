@@ -5,10 +5,11 @@ import java.io.Serializable;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "allContracts", query = "SELECT c FROM Contract c"),
-        @NamedQuery(name = "allContractsForUser", query = "SELECT c FROM Contract c WHERE c.username = :username"),
-        @NamedQuery(name = "allContractsForUserForCategory", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.category = :category"),
-        @NamedQuery(name = "allContractsForCategory", query = "SELECT c FROM Contract c WHERE c.category = :category")})
+        @NamedQuery(name = "allActiveContracts", query = "SELECT c FROM Contract c WHERE c.isActive = true"),
+        @NamedQuery(name = "allContractsForUser", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.isActive = true"),
+        @NamedQuery(name = "allContractsForUserForCategory", query = "SELECT c FROM Contract c WHERE c.username = :username AND c.category = :category AND c.isActive = true"),
+        @NamedQuery(name = "allContractsForCategory", query = "SELECT c FROM Contract c WHERE c.category = :category AND c.isActive = true"),
+        @NamedQuery(name="allContractsRequestedForUserAndCategory", query = "SELECT c FROM Contract c JOIN Request r ON r.contractId = c.id WHERE c.username = :userName AND c.category = :category")})
 public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +25,7 @@ public class Contract implements Serializable {
     protected String plate;
     protected Integer capitalAmount;
     protected Integer minYears;
+    protected Boolean isActive;
 
     public Contract() {
     }
@@ -34,25 +36,52 @@ public class Contract implements Serializable {
         this.amount = amount;
         this.kindId = kindid;
         this.category = category;
+        this.isActive = true;
     }
 
     public Contract(String title, String username, Integer amount, Integer kindid, String category, Integer maxAmount, String address) {
         this(title, username, amount, kindid, category);
         this.maxAmount = maxAmount;
         this.address = address;
+        this.isActive = true;
     }
 
     public Contract(String title, String username, Integer amount, Integer kindid, String category, String model, String plate) {
         this(title, username, amount, kindid, category);
         this.model = model;
         this.plate = plate;
+        this.isActive = true;
     }
 
     public Contract(String title, String username, Integer amount, Integer kindid, String category, Integer capitalAmount, Integer minYears) {
         this(title, username, amount, kindid, category);
         this.capitalAmount = capitalAmount;
         this.minYears = minYears;
+        this.isActive = true;
     }
+
+
+    public Contract(String title, String username, Integer amount, Integer kindid, String category, Integer maxAmount, String address, Boolean isActive) {
+        this(title, username, amount, kindid, category);
+        this.maxAmount = maxAmount;
+        this.address = address;
+        this.isActive = isActive;
+    }
+
+    public Contract(String title, String username, Integer amount, Integer kindid, String category, String model, String plate, Boolean isActive) {
+        this(title, username, amount, kindid, category);
+        this.model = model;
+        this.plate = plate;
+        this.isActive = isActive;
+    }
+
+    public Contract(String title, String username, Integer amount, Integer kindid, String category, Integer capitalAmount, Integer minYears, Boolean isActive) {
+        this(title, username, amount, kindid, category);
+        this.capitalAmount = capitalAmount;
+        this.minYears = minYears;
+        this.isActive = isActive;
+    }
+
 
     public String getUsername() {
         return username;

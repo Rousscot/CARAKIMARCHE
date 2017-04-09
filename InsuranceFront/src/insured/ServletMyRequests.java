@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-@WebServlet("/mes_contrats")
+@WebServlet("/mes_demandes")
 //TODO @ServletSecurity(@HttpConstraint(rolesAllowed = {"INSURED"}))
-public class ServletMyContracts extends AbstractServlet {
+public class ServletMyRequests extends AbstractServlet {
     protected static final long serialVersionUID = 1L;
 
     @EJB
@@ -37,10 +37,7 @@ public class ServletMyContracts extends AbstractServlet {
 
     @Override
     public void initPostCommands(Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> map) {
-        map.put("AskRemoveContract", (HttpServletRequest request, HttpServletResponse response) -> {
-            requestRemote.addRequest(Integer.parseInt(request.getParameter("action:AskRemoveContract")), "removal", true);
-            this.launchPage(request, response);
-        });
+        //TODO ?
     }
 
     @Override
@@ -54,7 +51,7 @@ public class ServletMyContracts extends AbstractServlet {
         request.setAttribute("tableCar", this.createTableCar(insuredUser));
 
         try {
-            this.getServletContext().getRequestDispatcher("/listMyContracts.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/listMyRequests.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
             e.printStackTrace();
         }
@@ -62,7 +59,7 @@ public class ServletMyContracts extends AbstractServlet {
 
     public String createTableHouse(User insuredUser) {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "HABITATION")) {
+        for (Contract contract : contractRemote.listContractsRequestedForUserForCategory(insuredUser.getUserName(), "HABITATION")) {
             Request request = requestRemote.getRequestFromContractId(contract.getId());
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
@@ -75,9 +72,9 @@ public class ServletMyContracts extends AbstractServlet {
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
-            sb.append(contract.getMaxAmount());
+            sb.append(contract.getMaxAmount()).append("</td>\n");
 
-            sb.append(getRemovalButton(request, contract.getId()));
+            sb.append(getRequestButtons(request, contract.getId()));
 
         }
         return sb.toString();
@@ -85,7 +82,7 @@ public class ServletMyContracts extends AbstractServlet {
 
     public String createTableLife(User insuredUser) {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "VIE")) {
+        for (Contract contract : contractRemote.listContractsRequestedForUserForCategory(insuredUser.getUserName(), "VIE")) {
             Request request = requestRemote.getRequestFromContractId(contract.getId());
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
@@ -98,16 +95,16 @@ public class ServletMyContracts extends AbstractServlet {
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td>");
-            sb.append(contract.getMinYears());
+            sb.append(contract.getMinYears()).append("</td>\n");
 
-            sb.append(getRemovalButton(request, contract.getId()));
+            sb.append(getRequestButtons(request, contract.getId()));
         }
         return sb.toString();
     }
 
     public String createTableCar(User insuredUser) {
         StringBuilder sb = new StringBuilder();
-        for (Contract contract : contractRemote.listContractsForUserForCategory(insuredUser.getUserName(), "AUTOMOBILE")) {
+        for (Contract contract : contractRemote.listContractsRequestedForUserForCategory(insuredUser.getUserName(), "AUTOMOBILE")) {
             Request request = requestRemote.getRequestFromContractId(contract.getId());
             sb.append("<tr><td class=\"mdl-data-table__cell--non-numeric\">");
             sb.append(contract.getTitle());
@@ -120,23 +117,36 @@ public class ServletMyContracts extends AbstractServlet {
             sb.append("</td>\n<td>");
             sb.append(contract.getAmount());
             sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\">");
-            sb.append(contract.getPlate());
+            sb.append(contract.getPlate()).append("</td>\n");
 
-            sb.append(getRemovalButton(request, contract.getId()));
+            sb.append(getRequestButtons(request, contract.getId()));
         }
         return sb.toString();
     }
 
-    public static String getRemovalButton(Request request, Integer contractId){
+    public static String getRequestButtons(Request request, Integer contractId) {
         StringBuilder sb = new StringBuilder("");
-        if(request != null && request.getRequestType().equals("removal")){
-            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\"><button class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--accent\" value=\"");
+        if (request != null) {
+            String button1Name = (request.getRequestType().equals("removal")) ? "Suppr":"Ajout";
+            String button2Name ;
+            String button2Style;
+
+            if(request.getBrokerAcceptance() == null) {
+                button2Name = "En cours";
+                button2Style = "";
+            } else {
+                button2Name = (request.getBrokerAcceptance()) ? "OK" : "KO";
+                button2Style = (request.getBrokerAcceptance()) ? " style = \"color:green;\" " : " style = \"color:red;\" ";
+            }
+
+
+            sb.append("<td class=\"mdl-data-table__cell--non-numeric\"><button class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--accent\" value=\"");
             sb.append(contractId);
-            sb.append("\" >Rés. en cours</button></td></tr>");
-        } else {
-            sb.append("</td>\n<td class=\"mdl-data-table__cell--non-numeric\"><form method=\"POST\" action=\"mes_contrats\"><button class=\"mdl-button mdl-js-button mdl-button--raised mdl-button--primary\" type =\"submit\" value=\"");
+            sb.append("\" >").append(button1Name).append("</button></td>");
+
+            sb.append("<td class=\"mdl-data-table__cell--non-numeric\"><button ").append(button2Style).append(" class=\"mdl-button mdl-js-button mdl-button--raised \" value=\"");
             sb.append(contractId);
-            sb.append("\" name=\"action:AskRemoveContract\">Dem. résiliation</button></form></td></tr>");
+            sb.append("\" >").append(button2Name).append("</button></td></tr>");
         }
         return sb.toString();
     }

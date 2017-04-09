@@ -17,7 +17,7 @@ public class ContractBean implements ContractRemote {
     protected EntityManager persistance;
 
     public List<Contract> listContracts() {
-        Query query = persistance.createNamedQuery("allContracts");
+        Query query = persistance.createNamedQuery("allActiveContracts");
         List<Contract> contracts = new ArrayList<>();
         contracts.addAll((List<Contract>) query.getResultList());
         return contracts;
@@ -35,6 +35,15 @@ public class ContractBean implements ContractRemote {
     public List<Contract> listContractsForUserForCategory(String userName, String category){
         Query query = persistance.createNamedQuery("allContractsForUserForCategory");
         query.setParameter("username", userName);
+        query.setParameter("category", category);
+        List<Contract> contracts = new ArrayList<>();
+        contracts.addAll((List<Contract>) query.getResultList());
+        return contracts;
+    }
+
+    public List<Contract> listContractsRequestedForUserForCategory(String userName, String category){
+        Query query = persistance.createNamedQuery("allContractsRequestedForUserAndCategory");
+        query.setParameter("userName", userName);
         query.setParameter("category", category);
         List<Contract> contracts = new ArrayList<>();
         contracts.addAll((List<Contract>) query.getResultList());
@@ -62,6 +71,31 @@ public class ContractBean implements ContractRemote {
     public void addCarContract(String title, String username, Integer amount, Integer kindid, String category, String model, String plate) {
         Contract contract = new Contract(title, username, amount, kindid, category, model, plate);
         persistance.persist(contract);
+    }
+
+
+    @Override
+    public Integer addSubscriptionLifeContract(String title, String username, Integer amount, Integer kindid, String category, Integer capitalAmount, Integer minYears) {
+        Contract contract = new Contract(title, username, amount, kindid, category, capitalAmount, minYears, false);
+        persistance.persist(contract);
+        persistance.flush();
+        return contract.getId();
+    }
+
+    @Override
+    public Integer addSubscriptionHouseContract(String title, String username, Integer amount, Integer kindid, String category, Integer maxAmount, String address) {
+        Contract contract = new Contract(title, username, amount, kindid, category, maxAmount, address, false);
+        persistance.persist(contract);
+        persistance.flush();
+        return contract.getId();
+    }
+
+    @Override
+    public Integer addSubscriptionCarContract(String title, String username, Integer amount, Integer kindid, String category, String model, String plate) {
+        Contract contract = new Contract(title, username, amount, kindid, category, model, plate, false);
+        persistance.persist(contract);
+        persistance.flush();
+        return contract.getId();
     }
 
 }
